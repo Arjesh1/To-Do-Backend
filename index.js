@@ -14,8 +14,7 @@ mongoose.connect("mongodb://localhost/toDoList");
 app.post("/add", async (req, res) => {
   try {
     const taskInfo = new ToDoModel(req.body);
-    const savedTask = await taskInfo.save();
-    res.json(savedTask);
+    await taskInfo.save();
   } catch (error) {
     console.log(error);
   }
@@ -39,7 +38,6 @@ app.put("/update", async (req, res) => {
 });
 
 app.delete("/delete/:id", async (req, res) => {
-  console.log(req.params);
   try {
     const { id } = req.params;
     await ToDoModel.findByIdAndDelete({ _id: id });
