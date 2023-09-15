@@ -29,6 +29,26 @@ app.get("/get", (req, res) => {
   }
 });
 
+app.put("/update", async (req, res) => {
+  try {
+    const { _id, ...rest } = req.body;
+    await ToDoModel.findByIdAndUpdate(_id, rest, { new: true });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  console.log(req.params);
+  try {
+    const { id } = req.params;
+    await ToDoModel.findByIdAndDelete({ _id: id });
+    res.json("Success");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at ${PORT}`);
 });
