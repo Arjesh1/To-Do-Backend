@@ -10,6 +10,10 @@ const ToDoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+  },
 });
 
 const ToDoModel = mongoose.model("tasks", ToDoSchema);
