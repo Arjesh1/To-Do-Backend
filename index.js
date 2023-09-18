@@ -54,8 +54,6 @@ app.delete("/delete/:id", async (req, res) => {
 //register
 
 app.post("/register", async (req, res) => {
-
-  console.log(req.body);
   try {
     const newUser = new UserModel(req.body);
     newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
