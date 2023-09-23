@@ -19,6 +19,7 @@ app.post("/add", async (req, res) => {
   try {
     const taskInfo = new ToDoModel(req.body);
     await taskInfo.save();
+    res.json("success")
   } catch (error) {
     console.log(error);
   }
@@ -36,6 +37,7 @@ app.put("/update", async (req, res) => {
   try {
     const { _id, ...rest } = req.body;
     await ToDoModel.findByIdAndUpdate(_id, rest, { new: true });
+    res.json("success")
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +47,7 @@ app.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await ToDoModel.findByIdAndDelete({ _id: id });
-    res.json("Success");
+    res.json("success");
   } catch (error) {
     console.log(error);
   }
@@ -68,3 +70,25 @@ app.post("/register", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running at ${PORT}`);
 });
+
+
+//login
+
+app.post("/login", async(req, res) =>{
+
+  const {email, password} = req.body
+  console.log(email);
+  
+  const matchedEmail = UserModel.findOne({email})
+
+  console.log(matchedEmail);
+
+  if(matchedEmail){
+    console.log("user exists");
+  } else {
+    console.log("User does  not exists.");
+  }
+
+
+
+})
