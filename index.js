@@ -78,20 +78,20 @@ app.post("/login", async(req, res) =>{
 
   const {email, password} = req.body
  
- UserModel.findOne({email: email})
-  .then((user) => {
+  //check for email if it exists
+UserModel.findOne({email: email})
+ .then((user) => {
     if(user){
-      res.json({message: "emailExists"})
+
+
+
       
     } else {
       res.json({message: "noEmail"})
      
     }
   })
- 
 
- 
-
-
+  
 
 })
