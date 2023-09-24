@@ -77,17 +77,20 @@ app.listen(PORT, () => {
 app.post("/login", async(req, res) =>{
 
   const {email, password} = req.body
-  console.log(email);
-  
-  const matchedEmail = UserModel.findOne({email})
+ 
+ UserModel.findOne({email: email})
+  .then((user) => {
+    if(user){
+      res.json({message: "emailExists"})
+      
+    } else {
+      res.json({message: "noEmail"})
+     
+    }
+  })
+ 
 
-  console.log(matchedEmail);
-
-  if(matchedEmail){
-    console.log("user exists");
-  } else {
-    console.log("User does  not exists.");
-  }
+ 
 
 
 
